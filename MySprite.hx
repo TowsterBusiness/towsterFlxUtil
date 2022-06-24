@@ -1,3 +1,5 @@
+package towsterFlxUtil;
+
 import flixel.FlxSprite;
 
 class MySprite extends FlxSprite

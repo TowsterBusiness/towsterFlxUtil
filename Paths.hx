@@ -1,3 +1,5 @@
+package towsterFlxUtil;
+
 import flixel.graphics.atlas.FlxAtlas;
 import flixel.graphics.frames.FlxAtlasFrames;
 
