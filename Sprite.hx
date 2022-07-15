@@ -2,15 +2,15 @@ package towsterFlxUtil;
 
 import flixel.FlxSprite;
 
-class MySprite extends FlxSprite
+class Sprite extends FlxSprite
 {
 	var offsetMap:Map<String, Array<Float>>;
 
 	public function new(x:Float, y:Float, path:String)
 	{
 		offsetMap = new Map<String, Array<Float>>();
+		frames = Paths.getAnimation(path);
 		super(x, y);
-		frames = Paths.getAnimation('button');
 	}
 
 	public function addOffset(name:String, x:Float, y:Float)
