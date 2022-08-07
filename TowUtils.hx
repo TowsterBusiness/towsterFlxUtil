@@ -2,7 +2,7 @@ package towsterFlxUtil;
 
 import flixel.text.FlxText;
 
-class Utils
+class TowUtils
 {
 	public static var windowWidth:Float = 640;
 	public static var windowHeight:Float = 480;

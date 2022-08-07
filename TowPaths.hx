@@ -17,7 +17,7 @@ enum FileTypes
 	XML;
 }
 
-class Paths
+class TowPaths
 {
 	/**
 	 * This is for spritesheet animations
@@ -26,7 +26,7 @@ class Paths
 	 */
 	static public function getAnimation(path:String):FlxAtlasFrames
 	{
-		return FlxAtlasFrames.fromSparrow(getFilePath('images/' + path, PNG), getFilePath('images' + path, XML));
+		return FlxAtlasFrames.fromSparrow(getFilePath(path, PNG), getFilePath(path, XML));
 	}
 
 	/** 
@@ -63,8 +63,30 @@ class Paths
 	 * @param fileType 
 	 * @return String
 	 */
-	static public function getFilePath(filePath:String, fileType:FileTypes):String
+	static public function getFilePath(filePath:String, ?fileType:FileTypes, ?addPrefix:Bool = true):String
 	{
+		var prefix = '';
+		if (fileType != null && addPrefix)
+		{
+			switch (fileType)
+			{
+				case PNG:
+					prefix = 'images';
+				case JSON:
+					prefix = 'data';
+				case MP4:
+					prefix = '';
+				case MP3:
+					prefix = 'music';
+				case OGG:
+					prefix = 'music';
+				case TXT:
+					prefix = 'data';
+				case XML:
+					prefix = 'images';
+			}
+			return 'assets/' + prefix + '/' + filePath + '.' + fileTypeToString(fileType);
+		}
 		return 'assets/' + filePath + '.' + fileTypeToString(fileType);
 	}
 
