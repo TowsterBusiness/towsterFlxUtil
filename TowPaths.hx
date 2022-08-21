@@ -34,9 +34,10 @@ class TowPaths
 	 * @param fileType
 	 * @return Dynamic Path:String, text:String, json:Json, sounds:Sound, xml:Xml
 	 */
-	static public function getFile(filePath:String, fileType:FileTypes):Dynamic
+	static public function getFile(filePath:String, fileType:FileTypes, ?addPrefix:Bool = true):Dynamic
 	{
-		var path = getFilePath(filePath, fileType);
+		var path = getFilePath(filePath, fileType, addPrefix);
+
 		switch (fileType)
 		{
 			case JSON:
@@ -87,7 +88,14 @@ class TowPaths
 			}
 			return 'assets/' + prefix + '/' + filePath + '.' + fileTypeToString(fileType);
 		}
-		return 'assets/' + filePath + '.' + fileTypeToString(fileType);
+		else if (fileType != null)
+		{
+			return 'assets/' + filePath + '.' + fileTypeToString(fileType);
+		}
+		else
+		{
+			return 'assets/' + filePath;
+		}
 	}
 
 	private static function fileTypeToString(fileType:FileTypes):String

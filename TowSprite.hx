@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 
 typedef AnimationJson =
 {
+	var imagePath:String;
 	var animation:Array<MovementJson>;
 }
 
@@ -19,7 +20,7 @@ typedef MovementJson =
 
 class TowSprite extends FlxSprite
 {
-	var offsetMap:Map<String, Array<Float>>;
+	public var offsetMap:Map<String, Array<Float>>;
 
 	public function new(x:Float, y:Float, path:String)
 	{
@@ -36,15 +37,13 @@ class TowSprite extends FlxSprite
 	public function playAnim(name:String)
 	{
 		animation.play(name);
+		updateHitbox();
 
 		if (!offsetMap.exists(name))
-		{
-			updateHitbox();
 			return;
-		}
 
 		var animOffset:Array<Float> = offsetMap.get(name);
-		offset.set(animOffset[0], animOffset[1]);
+		offset.set(offset.x + animOffset[0], offset.y + animOffset[1]);
 	}
 
 	public function loadAnimations(jsonPath:String)
@@ -53,6 +52,7 @@ class TowSprite extends FlxSprite
 		for (move in animationJson.animation)
 		{
 			animation.addByPrefix(move.name, move.prefix, move.frameRate, move.isLoop, move.flipX);
+			addOffset(move.name, move.offset[0], move.offset[1]);
 		}
 	}
 }

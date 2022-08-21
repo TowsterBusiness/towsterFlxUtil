@@ -1,5 +1,6 @@
 package towsterFlxUtil;
 
+import flixel.FlxObject;
 import flixel.text.FlxText;
 
 class TowUtils
@@ -27,5 +28,13 @@ class TowUtils
 	public static function percentFromWidth(percent:Float, ?doesRoundToInt = false):Float
 	{
 		return percent * windowWidth;
+	}
+
+	public static function debug(obj:FlxObject, ?id:String)
+	{
+		if (id == null)
+			trace(obj.x + ' , ' + obj.y);
+		else
+			trace(id + ': ' + obj.x + ' , ' + obj.y);
 	}
 }
