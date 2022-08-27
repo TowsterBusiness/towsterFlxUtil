@@ -1,5 +1,6 @@
 package towsterFlxUtil;
 
+import flixel.FlxG;
 import flixel.graphics.atlas.FlxAtlas;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.system.FlxAssets.FlxGraphicAsset;
@@ -45,7 +46,7 @@ class TowPaths
 			case MP3:
 				return FileSystem.getSound(path);
 			case OGG:
-				return FileSystem.getSound(path);
+				return FlxG.sound.load(path);
 			case TXT:
 				return FileSystem.getText(path);
 			case XML:
@@ -59,7 +60,7 @@ class TowPaths
 
 	/**
 	 * ex. input as:
-	 * `filePath('data/dog-picture', PNG);`
+	 * `filePath('dog-picture', PNG);`
 	 * @param filePath don't add assets/
 	 * @param fileType 
 	 * @return String
@@ -78,9 +79,9 @@ class TowPaths
 				case MP4:
 					prefix = '';
 				case MP3:
-					prefix = 'music';
+					prefix = 'sounds';
 				case OGG:
-					prefix = 'music';
+					prefix = 'sounds';
 				case TXT:
 					prefix = 'data';
 				case XML:
