@@ -22,11 +22,19 @@ class TowSprite extends FlxSprite
 {
 	public var offsetMap:Map<String, Array<Float>>;
 
-	public function new(x:Float, y:Float, path:String)
+	public function new(x:Float, y:Float, path:String, ?loadAnim:Bool = false)
 	{
 		super(x, y);
 		offsetMap = new Map<String, Array<Float>>();
-		frames = TowPaths.getAnimation(path);
+
+		if (loadAnim)
+		{
+			loadAnimations(path);
+		}
+		else
+		{
+			frames = TowPaths.getAnimation(path);
+		}
 	}
 
 	public function addOffset(name:String, x:Float, y:Float)
@@ -49,6 +57,9 @@ class TowSprite extends FlxSprite
 	public function loadAnimations(jsonPath:String)
 	{
 		var animationJson:AnimationJson = TowPaths.getFile(jsonPath, JSON);
+
+		frames = TowPaths.getAnimation(animationJson.imagePath);
+
 		for (move in animationJson.animation)
 		{
 			animation.addByPrefix(move.name, move.prefix, move.frameRate, move.isLoop, move.flipX);
